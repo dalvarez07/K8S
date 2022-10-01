@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: rs-app-k8s-api-persona
+  labels:
+    name: app-k8s-api-persona
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-k8s-api-persona
+  template: # Plantilla que define los containers
+    metadata:
+      labels:
+        app: app-k8s-api-persona
+        version: v1
+    spec:
+      containers:
+        - name: app-k8s-api-persona
+          image: dalvarez07/app_k8s:1.0.0
+          imagePullPolicy: Always
+          ports:
+              - containerPort: 8080
+          env:
+          - name: host
+            valueFrom:
+              configMapKeyRef:
+                name: config-app
+                key: hostbd
+          - name: port
+            valueFrom:
+              configMapKeyRef:
+                name: config-app
+                key: portbd
+          - name: MYSQL_ROOT_PASSWORD
+            value: toor
+          - name: MYSQL_ROOT_HOST
+            value: "%"

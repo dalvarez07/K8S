@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: bd-api
+  labels:
+    app: bd-api-persona
+spec:
+  ports:
+  - name: bd-api-persona
+    port: 3306
+  clusterIP: None
+  selector:
+    app: bd-api-persona

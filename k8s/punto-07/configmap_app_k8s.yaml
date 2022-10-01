@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-app
+data:
+  hostbd: "bd-api.name2.svc.cluster.local"
+  portbd: "3306"

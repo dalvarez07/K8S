@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-app
+data:
+  hostbd: "db-k8s-api.name1.svc.cluster.local"
+  portbd: "3306"

@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deploy-app-api-persona
+  labels:
+    app: app-api-persona
+spec:
+  replicas: 4
+  selector:
+    matchLabels:
+      app: app-api-persona
+  template: # Plantilla que define los containers
+    metadata:
+      labels:
+        app: app-api-persona
+        version: v1
+    spec:
+      containers:
+        - name: app-api-persona
+          image: dalvarez07/db_k8s:1.0.0
+          imagePullPolicy: Always
+          ports:
+              - containerPort: 8080
+          env:
+          - name: host
+            valueFrom:
+              configMapKeyRef:
+                name: config-app
+                key: hostbd
+          - name: port
+            valueFrom:
+              configMapKeyRef:
+                name: config-app
+                key: portbd
+          - name: MYSQL_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: secrets-app
+                key: passbd
+          - name: MYSQL_ROOT_HOST
+            valueFrom:
+              secretKeyRef:
+                name: secrets-app
+                key: hostbd

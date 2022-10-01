@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: bd-api-persona
+  labels:
+   app: bd-api-persona
+spec:
+  serviceName: "bd-api-persona"
+  replicas: 2
+  selector:
+    matchLabels:
+      app: bd-api-persona
+  template:
+    metadata:
+      labels:
+        app: bd-api-persona
+    spec:
+      containers:
+      - name: bd
+        image: dalvarez07/db_k8s:1.0.0
+        ports:
+        - containerPort: 3306

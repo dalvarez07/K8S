@@ -1,0 +1,5 @@
+Comandos ejecutados:
+
+1. curl -i http://localhost:8080/api/personas/
+
+2. kubectl logs -l app=api-persona -c api-persona
